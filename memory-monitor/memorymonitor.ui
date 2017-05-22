@@ -6,21 +6,41 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>899</width>
+    <height>588</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MemoryMonitor</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QCustomPlot" name="widget" native="true">
+   <widget class="QCustomPlot" name="gen_monitor" native="true">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>40</y>
-      <width>171</width>
-      <height>131</height>
+      <x>70</x>
+      <y>20</y>
+      <width>751</width>
+      <height>211</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableView" name="proc_table">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>250</y>
+      <width>291</width>
+      <height>261</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QCustomPlot" name="proc_graph" native="true">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>250</y>
+      <width>431</width>
+      <height>261</height>
      </rect>
     </property>
    </widget>
@@ -30,8 +50,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
-     <height>19</height>
+     <width>899</width>
+     <height>25</height>
     </rect>
    </property>
   </widget>
