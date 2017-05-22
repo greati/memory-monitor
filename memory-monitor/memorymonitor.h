@@ -23,7 +23,10 @@ private:
     QTimer m_timer;
     Ui::MemoryMonitor *ui;
     QVector<double> memX, memY;
-    double v;
+
+    QVector<double> memprocX, memprocY;
+
+    double general_time, process_time;
 
 };
 
