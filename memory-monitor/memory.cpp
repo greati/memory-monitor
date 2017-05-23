@@ -108,7 +108,7 @@ vector<process> process_by_mem_usage(){
 		ss.clear();
 	}
 
-	system("rm process_by_mem_usage.txt");
+	//system("rm process_by_mem_usage.txt");
 	return proc;
 }
 
@@ -120,7 +120,7 @@ double mem_usage(int pid){
 	string input;
 	getline(file, input);
 
-	system("rm mem_usage.txt");
+	//system("rm mem_usage.txt");
 	return stod(input);
 
 }

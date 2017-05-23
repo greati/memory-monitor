@@ -18,6 +18,7 @@ public:
 
 public slots:
     void handleTimeout();
+    void processSelected(int, int);
 
 private:
     QTimer m_timer;
@@ -28,6 +29,7 @@ private:
 
     double general_time, process_time;
 
+    int selected_process;
 };
 
 #endif // MEMORYMONITOR_H
