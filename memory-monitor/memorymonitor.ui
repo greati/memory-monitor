@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>899</width>
+    <width>988</width>
     <height>588</height>
    </rect>
   </property>
@@ -17,30 +17,30 @@
    <widget class="QCustomPlot" name="gen_monitor" native="true">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>30</x>
       <y>20</y>
-      <width>751</width>
+      <width>921</width>
       <height>211</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTableView" name="proc_table">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>250</y>
-      <width>291</width>
-      <height>261</height>
      </rect>
     </property>
    </widget>
    <widget class="QCustomPlot" name="proc_graph" native="true">
     <property name="geometry">
      <rect>
-      <x>390</x>
+      <x>560</x>
       <y>250</y>
-      <width>431</width>
+      <width>391</width>
       <height>261</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="proc_table">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>250</y>
+      <width>521</width>
+      <height>271</height>
      </rect>
     </property>
    </widget>
@@ -50,7 +50,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>899</width>
+     <width>988</width>
      <height>25</height>
     </rect>
    </property>

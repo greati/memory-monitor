@@ -14,9 +14,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         memorymonitor.cpp \
-        qcustomplot.cpp
+        qcustomplot.cpp \
+        #memory.cpp
 
 HEADERS  += memorymonitor.h \
             qcustomplot.h
 
 FORMS    += memorymonitor.ui
+
+CONFIG += c++11

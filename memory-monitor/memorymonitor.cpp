@@ -1,5 +1,6 @@
 #include "memorymonitor.h"
 #include "ui_memorymonitor.h"
+#include "memory.cpp"
 
 MemoryMonitor::MemoryMonitor(QWidget *parent) :
     QMainWindow(parent),
@@ -12,7 +13,7 @@ MemoryMonitor::MemoryMonitor(QWidget *parent) :
 
     QObject::connect(&m_timer,SIGNAL(timeout()), this, SLOT(handleTimeout()));
 
-    m_timer.setInterval(1000);
+    m_timer.setInterval(500);
 
     // Main memory usage
     ui->gen_monitor->addGraph();
@@ -34,20 +35,42 @@ MemoryMonitor::MemoryMonitor(QWidget *parent) :
     ui->proc_graph->yAxis->setRange(0,100);
     ui->proc_graph->xAxis->setRange(0,60);
 
+    // Proc Table
+    QStringList table_proc_headers;
+    table_proc_headers << "PID" << "Name" << "%MEM" << "Min Fault" << "Major Fault";
+    ui->proc_table->setColumnCount(5);
+    ui->proc_table->setHorizontalHeaderLabels(table_proc_headers);
+    ui->proc_table->verticalHeader()->setVisible(false);
     m_timer.start();
 
 }
 
 void MemoryMonitor::handleTimeout(){
+
     // General monitor
+    std::vector<double> geninfo = meminfo();
+
     qreal gx= general_time;//ui->gen_monitor->width() / ui->gen_monitor->xAxis->tickStep();
-    qreal mgy = 50;
+    qreal mgy = geninfo[0];
     memY.append(mgy);
     memX.append(gx);
     ui->gen_monitor->graph(0)->setData(memX,memY);
     ui->gen_monitor->replot();
 
     // Process monitor
+
+    std::vector<process> processes = process_by_mem_usage();
+    ui->proc_table->setRowCount(processes.size());
+    for (unsigned int i = 0; i < processes.size(); ++i) {
+        ui->proc_table->setItem(i, 0, new QTableWidgetItem(QString::number(processes[i].pid)));
+        ui->proc_table->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(processes[i].proc_name)));
+        ui->proc_table->setItem(i, 2, new QTableWidgetItem(QString::number(processes[i].mem_usage)));
+        ui->proc_table->setItem(i, 3, new QTableWidgetItem(QString::number(processes[i].min_flt)));
+        ui->proc_table->setItem(i, 4, new QTableWidgetItem(QString::number(processes[i].maj_flt)));
+
+
+    }
+
     qreal px = process_time;//ui->gen_monitor->width() / ui->gen_monitor->xAxis->tickStep();
     qreal mpy = 50;
     memprocY.append(mpy);
