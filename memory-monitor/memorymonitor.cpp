@@ -22,6 +22,10 @@ MemoryMonitor::MemoryMonitor(QWidget *parent) :
     ui->gen_monitor->graph(0)->setPen(QPen(Qt::blue));
     ui->gen_monitor->graph(0)->setData(memX,memY);
 
+    ui->gen_monitor->addGraph();
+    ui->gen_monitor->graph(1)->setPen(QPen(Qt::red));
+    ui->gen_monitor->graph(1)->setData(genswapX,genswapX);
+
     ui->gen_monitor->xAxis->setLabel("Usage");
     ui->gen_monitor->yAxis->setLabel("Time");
     ui->gen_monitor->yAxis->setRange(0,100);
@@ -52,13 +56,21 @@ void MemoryMonitor::handleTimeout(){
     // General monitor
     std::vector<double> geninfo = meminfo();
 
-    qreal gx= general_time;//ui->gen_monitor->width() / ui->gen_monitor->xAxis->tickStep();
+    qreal gx = general_time;
     qreal mgy = geninfo[0];
+    ui->gen_mem->setText(QString::number(geninfo[0]) + "%");
     memY.append(mgy);
     memX.append(gx);
     ui->gen_monitor->graph(0)->setData(memX,memY);
     ui->gen_monitor->replot();
 
+    qreal mgsy = geninfo[1];
+    genswapX.append(gx);
+    genswapY.append(mgsy);
+    ui->gen_monitor->graph(1)->setData(genswapX,genswapY);
+    ui->gen_swap->setText(QString::number(geninfo[1]) + " MB");
+
+    ui->gen_cache->setText(QString::number(geninfo[2]) + " MB");
 
     // Process table
     std::vector<process> processes = process_by_mem_usage();
@@ -98,6 +110,7 @@ void MemoryMonitor::handleTimeout(){
 void MemoryMonitor::processSelected(int nrow, int ncol) {
     process_time = 0;
     selected_process = ui->proc_table->item(nrow, 0)->text().toInt();
+    ui->proc_pid->setText(QString::number(selected_process));
     memprocX.clear(); memprocY.clear();
 }
 

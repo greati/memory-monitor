@@ -24,6 +24,7 @@ private:
     QTimer m_timer;
     Ui::MemoryMonitor *ui;
     QVector<double> memX, memY;
+    QVector<double> genswapX, genswapY;
 
     QVector<double> memprocX, memprocY;
 

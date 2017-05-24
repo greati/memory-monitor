@@ -79,7 +79,8 @@ vector<double> meminfo(){
 	info.push_back(cached + sreclaimable - shmem); // cache
 
 	info[0] = info[0] / total * 100; // ram
-	info[1] = info[1] / swaptotal * 100; // swap
+
+    info[1] = info[1] != 0 ? info[1] / swaptotal * 100 : 0; // swap
 
 	return info;
 }
