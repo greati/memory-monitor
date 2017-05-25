@@ -15,8 +15,9 @@ struct process{
 	double mem_usage;
 	long min_flt;
 	long maj_flt;
-	process(int _pid, string _name, double _mem, long _minf, long _maj) : 
-	pid{_pid}, proc_name{_name}, mem_usage{_mem}, min_flt{_minf}, maj_flt{_maj}{}
+	double swap;
+	process(int _pid, string _name, double _mem, long _minf, long _maj,double _swap) : 
+	pid{_pid}, proc_name{_name}, mem_usage{_mem}, min_flt{_minf}, maj_flt{_maj}, swap{_swap}{}
 };
 
 vector<double> meminfo(){
@@ -82,7 +83,33 @@ vector<double> meminfo(){
 
     info[1] = info[1] != 0 ? info[1] / swaptotal * 100 : 0; // swap
 
+    file.close();
 	return info;
+}
+
+double get_swap_proc(int pid){
+	ifstream file("/proc/"+to_string(pid)+"/status", ifstream::in);
+	if(file.is_open()){
+		string input = "";
+		double swapproc = 0;
+
+		while(getline(file, input)){
+			if(string(input.begin(), input.begin() + 6).compare("VmSwap") == 0){
+				stringstream ss; 
+				ss << input;
+				ss >> input;
+				ss >> swapproc;
+				
+				ss.str(string());
+				ss.clear();
+
+				file.close();
+				return swapproc;
+			}
+		}		
+	}
+	file.close();
+	return 0;
 }
 
 vector<process> process_by_mem_usage(){
@@ -104,14 +131,16 @@ vector<process> process_by_mem_usage(){
 		ss >> mem;
 		ss >> min_flt;
 		ss >> maj_flt;
-		proc.push_back( process(pid, comm, mem, min_flt, maj_flt) );
+		proc.push_back( process(pid, comm, mem, min_flt, maj_flt, get_swap_proc(pid)) );
 		ss.str(string());
 		ss.clear();
 	}
 
+	file.close();
 	//system("rm process_by_mem_usage.txt");
 	return proc;
 }
+
 
 double mem_usage(int pid){
 	string command = "ps --pid " + to_string(pid) + " o %mem --no-header > mem_usage.txt";
@@ -121,7 +150,7 @@ double mem_usage(int pid){
 	string input;
 	getline(file, input);
 
+	file.close();
 	//system("rm mem_usage.txt");
-	return stod(input);
-
+	return stold(input);
 }
