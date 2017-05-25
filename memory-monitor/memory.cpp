@@ -150,7 +150,15 @@ double mem_usage(int pid){
 	string input;
 	getline(file, input);
 
+	double value;
+
+	stringstream ss;
+	ss << input;
+	ss >> value;
+	ss.str(string());
+	ss.clear();
+	
 	file.close();
 	//system("rm mem_usage.txt");
-	return stold(input);
+	return value;
 }
