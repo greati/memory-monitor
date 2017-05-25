@@ -68,7 +68,7 @@ void MemoryMonitor::handleTimeout(){
     genswapX.append(gx);
     genswapY.append(mgsy);
     ui->gen_monitor->graph(1)->setData(genswapX,genswapY);
-    ui->gen_swap->setText(QString::number(geninfo[1]) + " MB");
+    ui->gen_swap->setText(QString::number(geninfo[1]) + "%");
 
     ui->gen_cache->setText(QString::number(geninfo[2]) + " MB");
 
@@ -100,7 +100,9 @@ void MemoryMonitor::handleTimeout(){
     if (general_time == 60) {
         general_time = 0;
         memX.clear(); memY.clear();
+        genswapX.clear(); genswapX.clear();
         ui->gen_monitor->graph(0)->setData(memX, memY);
+        ui->gen_monitor->graph(1)->setData(genswapX,genswapY);
     } else general_time += 1;
 
     if (process_time == 60) {
