@@ -186,19 +186,6 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="txgen_mem_3">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>67</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Memory:</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
