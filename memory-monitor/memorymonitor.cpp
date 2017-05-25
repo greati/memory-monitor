@@ -18,26 +18,36 @@ MemoryMonitor::MemoryMonitor(QWidget *parent) :
     m_timer.setInterval(500);
 
     // Main memory usage
+    ui->gen_monitor->legend->setVisible(true);
     ui->gen_monitor->addGraph();
     ui->gen_monitor->graph(0)->setPen(QPen(Qt::blue));
     ui->gen_monitor->graph(0)->setData(memX,memY);
+    ui->gen_monitor->graph(0)->setName("Main memory");
+    ui->gen_monitor->xAxis->setVisible(false);
 
     ui->gen_monitor->addGraph();
     ui->gen_monitor->graph(1)->setPen(QPen(Qt::red));
     ui->gen_monitor->graph(1)->setData(genswapX,genswapX);
+    ui->gen_monitor->graph(1)->setName("Swap");
 
-    ui->gen_monitor->xAxis->setLabel("Usage");
-    ui->gen_monitor->yAxis->setLabel("Time");
+    ui->gen_monitor->yAxis->setLabel("Usage (%)");
+    ui->gen_monitor->xAxis->setAutoTickLabels(false);
+    //ui->gen_monitor->xAxis->setLabel("Time");
     ui->gen_monitor->yAxis->setRange(0,100);
     ui->gen_monitor->xAxis->setRange(0,60);
 
     // Proc graph
+    ui->proc_graph->legend->setVisible(true);
+
     ui->proc_graph->addGraph();
     ui->proc_graph->graph(0)->setPen(QPen(Qt::blue));
     ui->proc_graph->graph(0)->setData(memprocX,memprocY);
+    ui->proc_graph->graph(0)->setName("Main memory");
+    ui->proc_graph->xAxis->setVisible(false);
 
-    ui->proc_graph->xAxis->setLabel("Usage (%)");
-    ui->proc_graph->yAxis->setLabel("Time");
+
+    ui->proc_graph->yAxis->setLabel("Usage (%)");
+    //ui->proc_graph->xAxis->setLabel("Time");
     ui->proc_graph->yAxis->setRange(0,100);
     ui->proc_graph->xAxis->setRange(0,60);
 
@@ -62,13 +72,14 @@ void MemoryMonitor::handleTimeout(){
     memY.append(mgy);
     memX.append(gx);
     ui->gen_monitor->graph(0)->setData(memX,memY);
-    ui->gen_monitor->replot();
 
     qreal mgsy = geninfo[1];
     genswapX.append(gx);
     genswapY.append(mgsy);
     ui->gen_monitor->graph(1)->setData(genswapX,genswapY);
     ui->gen_swap->setText(QString::number(geninfo[1]) + "%");
+
+    ui->gen_monitor->replot();
 
     ui->gen_cache->setText(QString::number(geninfo[2]) + " MB");
 
