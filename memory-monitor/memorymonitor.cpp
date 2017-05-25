@@ -10,7 +10,7 @@ MemoryMonitor::MemoryMonitor(QWidget *parent) :
 
     general_time = 0;
     process_time = 0;
-    selected_process = 2;
+    selected_process = -1;
 
     QObject::connect(&m_timer,SIGNAL(timeout()), this, SLOT(handleTimeout()));
     connect(ui->proc_table, SIGNAL(cellDoubleClicked(int,int)), this, SLOT(processSelected(int, int)));
@@ -36,14 +36,14 @@ MemoryMonitor::MemoryMonitor(QWidget *parent) :
     ui->proc_graph->graph(0)->setPen(QPen(Qt::blue));
     ui->proc_graph->graph(0)->setData(memprocX,memprocY);
 
-    ui->proc_graph->xAxis->setLabel("Usage");
+    ui->proc_graph->xAxis->setLabel("Usage (%)");
     ui->proc_graph->yAxis->setLabel("Time");
     ui->proc_graph->yAxis->setRange(0,100);
     ui->proc_graph->xAxis->setRange(0,60);
 
     // Proc Table
     QStringList table_proc_headers;
-    table_proc_headers << "PID" << "Name" << "%MEM" << "Min Fault" << "Major Fault";
+    table_proc_headers << "PID" << "Name" << "Memory (%)" << "Min Fault" << "Major Fault";
     ui->proc_table->setColumnCount(5);
     ui->proc_table->setHorizontalHeaderLabels(table_proc_headers);
     ui->proc_table->verticalHeader()->setVisible(false);
@@ -68,7 +68,7 @@ void MemoryMonitor::handleTimeout(){
     genswapX.append(gx);
     genswapY.append(mgsy);
     ui->gen_monitor->graph(1)->setData(genswapX,genswapY);
-    ui->gen_swap->setText(QString::number(geninfo[1]) + " MB");
+    ui->gen_swap->setText(QString::number(geninfo[1]) + "%");
 
     ui->gen_cache->setText(QString::number(geninfo[2]) + " MB");
 
@@ -84,6 +84,8 @@ void MemoryMonitor::handleTimeout(){
         ui->proc_table->setItem(i, 3, new QTableWidgetItem(QString::number(processes[i].min_flt)));
         ui->proc_table->setItem(i, 4, new QTableWidgetItem(QString::number(processes[i].maj_flt)));
     }
+    if (selected_process == -1)
+        processSelected(0,0);
 
     // Process monitor
     qreal px = process_time;//ui->gen_monitor->width() / ui->gen_monitor->xAxis->tickStep();
@@ -92,12 +94,15 @@ void MemoryMonitor::handleTimeout(){
     memprocX.append(px);
     ui->proc_graph->graph(0)->setData(memprocX,memprocY);
     ui->proc_graph->replot();
+    ui->proc_mem->setText(QString::number(mpy) + "%");
 
 
     if (general_time == 60) {
         general_time = 0;
         memX.clear(); memY.clear();
+        genswapX.clear(); genswapX.clear();
         ui->gen_monitor->graph(0)->setData(memX, memY);
+        ui->gen_monitor->graph(1)->setData(genswapX,genswapY);
     } else general_time += 1;
 
     if (process_time == 60) {
