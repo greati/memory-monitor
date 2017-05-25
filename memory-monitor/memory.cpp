@@ -151,6 +151,7 @@ double mem_usage(int pid){
 	getline(file, input);
 
 	file.close();
+	std::cout << stold(input) << std::endl;
 	//system("rm mem_usage.txt");
 	return stold(input);
 }

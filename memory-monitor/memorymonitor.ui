@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>988</width>
+    <width>1026</width>
     <height>588</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>30</x>
       <y>20</y>
-      <width>921</width>
+      <width>961</width>
       <height>181</height>
      </rect>
     </property>
@@ -27,9 +27,9 @@
    <widget class="QCustomPlot" name="proc_graph" native="true">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>640</x>
       <y>250</y>
-      <width>391</width>
+      <width>351</width>
       <height>251</height>
      </rect>
     </property>
@@ -39,7 +39,7 @@
      <rect>
       <x>30</x>
       <y>250</y>
-      <width>521</width>
+      <width>601</width>
       <height>271</height>
      </rect>
     </property>
@@ -137,7 +137,7 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>641</x>
       <y>505</y>
       <width>41</width>
       <height>17</height>
@@ -150,7 +150,7 @@
    <widget class="QLabel" name="proc_pid">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>671</x>
       <y>505</y>
       <width>81</width>
       <height>17</height>
@@ -163,7 +163,7 @@
    <widget class="QLabel" name="txgen_mem_2">
     <property name="geometry">
      <rect>
-      <x>680</x>
+      <x>747</x>
       <y>505</y>
       <width>67</width>
       <height>17</height>
@@ -176,9 +176,48 @@
    <widget class="QLabel" name="proc_mem">
     <property name="geometry">
      <rect>
-      <x>744</x>
+      <x>811</x>
       <y>505</y>
       <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="txgen_mem_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Memory:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>504</y>
+      <width>66</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Swap:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="proc_swap">
+    <property name="geometry">
+     <rect>
+      <x>925</x>
+      <y>504</y>
+      <width>66</width>
       <height>20</height>
      </rect>
     </property>
@@ -192,7 +231,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>988</width>
+     <width>1026</width>
      <height>25</height>
     </rect>
    </property>
