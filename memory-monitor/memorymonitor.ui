@@ -50,7 +50,7 @@
    <widget class="QLabel" name="gen_cache">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>303</x>
       <y>210</y>
       <width>101</width>
       <height>17</height>
@@ -95,7 +95,7 @@
    <widget class="QLabel" name="gen_mem">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>93</x>
       <y>210</y>
       <width>101</width>
       <height>17</height>
@@ -124,7 +124,7 @@
    <widget class="QLabel" name="gen_swap">
     <property name="geometry">
      <rect>
-      <x>530</x>
+      <x>523</x>
       <y>210</y>
       <width>141</width>
       <height>17</height>
@@ -152,7 +152,7 @@
      <rect>
       <x>590</x>
       <y>505</y>
-      <width>67</width>
+      <width>81</width>
       <height>17</height>
      </rect>
     </property>
@@ -176,9 +176,9 @@
    <widget class="QLabel" name="proc_mem">
     <property name="geometry">
      <rect>
-      <x>750</x>
+      <x>744</x>
       <y>505</y>
-      <width>81</width>
+      <width>91</width>
       <height>20</height>
      </rect>
     </property>
