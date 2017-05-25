@@ -30,7 +30,7 @@
       <x>560</x>
       <y>250</y>
       <width>391</width>
-      <height>231</height>
+      <height>251</height>
      </rect>
     </property>
    </widget>
@@ -42,6 +42,9 @@
       <width>521</width>
       <height>271</height>
      </rect>
+    </property>
+    <property name="editTriggers">
+     <set>QAbstractItemView::NoEditTriggers</set>
     </property>
    </widget>
    <widget class="QLabel" name="gen_cache">
@@ -135,7 +138,7 @@
     <property name="geometry">
      <rect>
       <x>560</x>
-      <y>490</y>
+      <y>505</y>
       <width>41</width>
       <height>17</height>
      </rect>
@@ -148,9 +151,35 @@
     <property name="geometry">
      <rect>
       <x>590</x>
-      <y>490</y>
+      <y>505</y>
       <width>67</width>
       <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="txgen_mem_2">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>505</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Memory:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="proc_mem">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>505</y>
+      <width>81</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
