@@ -99,13 +99,22 @@ void MemoryMonitor::handleTimeout(){
 
     // Process monitor
     qreal px = process_time;//ui->gen_monitor->width() / ui->gen_monitor->xAxis->tickStep();
-    qreal mpy = mem_usage(selected_process);
-    memprocY.append(mpy);
-    memprocX.append(px);
-    ui->proc_graph->graph(0)->setData(memprocX,memprocY);
-    ui->proc_graph->replot();
-    ui->proc_mem->setText(QString::number(mpy) + "%");
-    ui->proc_swap->setText(QString::number(get_swap_proc(selected_process)) + " KB");
+
+    qreal mpy = 0.0;
+
+    try {
+        qreal mpy = mem_usage(selected_process);
+
+        memprocY.append(mpy);
+        memprocX.append(px);
+        ui->proc_graph->graph(0)->setData(memprocX,memprocY);
+        ui->proc_graph->replot();
+        ui->proc_mem->setText(QString::number(mpy) + "%");
+        ui->proc_swap->setText(QString::number(get_swap_proc(selected_process)) + " KB");
+    } catch(std::exception & e){
+        processSelected(0,0);
+        process_time = 0;
+    }
 
     if (general_time == 60) {
         general_time = 0;
@@ -120,6 +129,7 @@ void MemoryMonitor::handleTimeout(){
         memprocX.clear(); memprocY.clear();
         ui->gen_monitor->graph(0)->setData(memprocX, memprocY);
     } else process_time += 1;
+
 }
 
 void MemoryMonitor::processSelected(int nrow, int ncol) {
