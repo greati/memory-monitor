@@ -32,7 +32,6 @@ MemoryMonitor::MemoryMonitor(QWidget *parent) :
 
     ui->gen_monitor->yAxis->setLabel("Usage (%)");
     ui->gen_monitor->xAxis->setAutoTickLabels(false);
-    //ui->gen_monitor->xAxis->setLabel("Time");
     ui->gen_monitor->yAxis->setRange(0,100);
     ui->gen_monitor->xAxis->setRange(0,60);
 
@@ -47,14 +46,13 @@ MemoryMonitor::MemoryMonitor(QWidget *parent) :
 
 
     ui->proc_graph->yAxis->setLabel("Usage (%)");
-    //ui->proc_graph->xAxis->setLabel("Time");
     ui->proc_graph->yAxis->setRange(0,100);
     ui->proc_graph->xAxis->setRange(0,60);
 
     // Proc Table
     QStringList table_proc_headers;
-    table_proc_headers << "PID" << "Name" << "Memory (%)" << "Min Fault" << "Major Fault";
-    ui->proc_table->setColumnCount(5);
+    table_proc_headers << "PID" << "Name" << "Memory (%)" << "Min Fault" << "Major Fault" << "Swap (KB)";
+    ui->proc_table->setColumnCount(6);
     ui->proc_table->setHorizontalHeaderLabels(table_proc_headers);
     ui->proc_table->verticalHeader()->setVisible(false);
     m_timer.start();
@@ -94,6 +92,7 @@ void MemoryMonitor::handleTimeout(){
         ui->proc_table->setItem(i, 2, new QTableWidgetItem(QString::number(processes[i].mem_usage)));
         ui->proc_table->setItem(i, 3, new QTableWidgetItem(QString::number(processes[i].min_flt)));
         ui->proc_table->setItem(i, 4, new QTableWidgetItem(QString::number(processes[i].maj_flt)));
+        ui->proc_table->setItem(i, 5, new QTableWidgetItem(QString::number(processes[i].swap)));
     }
     if (selected_process == -1)
         processSelected(0,0);
@@ -106,7 +105,7 @@ void MemoryMonitor::handleTimeout(){
     ui->proc_graph->graph(0)->setData(memprocX,memprocY);
     ui->proc_graph->replot();
     ui->proc_mem->setText(QString::number(mpy) + "%");
-
+    ui->proc_swap->setText(QString::number(get_swap_proc(selected_process)) + " KB");
 
     if (general_time == 60) {
         general_time = 0;

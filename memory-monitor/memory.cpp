@@ -162,6 +162,7 @@ double mem_usage(int pid){
 	ss.clear();
 	
 	file.close();
+	std::cout << stold(input) << std::endl;
 	//system("rm mem_usage.txt");
 	return value;
 }
