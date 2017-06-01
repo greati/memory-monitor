@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
+#include <exception>
 
 using namespace std;
 
@@ -149,6 +150,8 @@ double mem_usage(int pid){
 	ifstream file("mem_usage.txt", ifstream::in);
 	string input;
 	getline(file, input);
+	
+	if(input.size() == 0)  throw std::logic_error("PID NOT EXIST!!\n");
 
 	double value;
 
